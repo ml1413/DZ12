@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         init()
         ivSend.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
-            intent.putExtra(Intent.EXTRA_EMAIL, getListEmail(etMail.text.toString()))
+            intent.putExtra(Intent.EXTRA_EMAIL, getArrayEmail(etMail.text.toString()))
             intent.putExtra(Intent.EXTRA_SUBJECT, etThem.text.toString())
             intent.putExtra(Intent.EXTRA_TEXT, etMessage.text.toString())
             startActivity(intent)
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         ivSend = findViewById(R.id.iv_send)
     }
 
-    private fun getListEmail(string: String): Array<String> {
+    private fun getArrayEmail(string: String): Array<String> {
         return string.split(regex = "[\\s+,]".toRegex()).stream()
             .filter { it.contains("@") }
             .map {
